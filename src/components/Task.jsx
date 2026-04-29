@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-key */
-import { useState } from "react";
-import Header from "./Header";
+import { useState } from "react"
+import Header from "./Header"
 
 function Task() {
-  const [inputValue, setInputValue] = useState("Teste");
+  const [inputValue, setInputValue] = useState("Teste")
   const [messages, setMessages] = useState([
     "Hello World",
     "Welcome to the Task Manager",
-  ]);
+  ])
 
   function handleButtonClick() {
-    setMessages([...messages, inputValue]);
+    setMessages([...messages, inputValue])
   }
 
   return (
@@ -25,11 +25,11 @@ function Task() {
       <button onClick={handleButtonClick}>Add Message</button>
       <ul>
         {messages.map((message) => {
-          return <li>{message}</li>;
+          return <li>{message}</li>
         })}
       </ul>
     </div>
-  );
+  )
 }
 
-export default Task;
+export default Task
