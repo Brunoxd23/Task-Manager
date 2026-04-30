@@ -1,9 +1,9 @@
-// import Task from "./components/Task";
+import Sidebar from "./components/sidebar"
 
 function App() {
   return (
     <div>
-      <h1 className="mb-2 p-6 text-red-500">Task Manager</h1>
+      <Sidebar />
     </div>
   )
 }
