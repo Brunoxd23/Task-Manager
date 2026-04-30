@@ -132,3 +132,12 @@
     @apply bg-gray-400;
   }
 }
+
+.sidebar-icon {
+  color: #00adb5;
+  transition: color 0.3s;
+}
+
+.sidebar-button:hover .sidebar-icon {
+  color: #fff;
+}
