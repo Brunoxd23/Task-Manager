@@ -1,7 +1,11 @@
-import Task from "./components/Task";
+// import Task from "./components/Task";
 
 function App() {
-  return <Task />;
+  return (
+    <div>
+      <h1 className="text-red-500 p-6">Task Manager</h1>
+    </div>
+  )
 }
 
-export default App;
+export default App
