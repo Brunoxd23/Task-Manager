@@ -33,16 +33,16 @@ function Task() {
         <div className="flex flex-col gap-2">
           {/* Manhã */}
           <div className="space-y-3">
-            <TasksSeparator title="Manhã" icon={SunIcon} />
+            <TasksSeparator title="Manhã" Icon={SunIcon} />
           </div>
           <div className="my-4 space-y-3">
             {/* Tarde */}
-            <TasksSeparator title="Tarde" icon={CloudIcon} />
+            <TasksSeparator title="Tarde" Icon={CloudIcon} />
           </div>
         </div>
         <div className="space-y-3">
           {/* Noite */}
-          <TasksSeparator title="Noite" icon={MoonIcon} />
+          <TasksSeparator title="Noite" Icon={MoonIcon} />
         </div>
       </div>
     </div>
