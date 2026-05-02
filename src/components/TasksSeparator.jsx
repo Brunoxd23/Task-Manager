@@ -1,4 +1,4 @@
-const TaskSeparator = ({ title, icon: Icon }) => {
+const TasksSeparator = ({ title, Icon }) => {
   return (
     <div className="flex items-center gap-2 border-b pb-2 text-gray-400">
       {Icon && <Icon className="h-5 w-5" />}
@@ -7,4 +7,4 @@ const TaskSeparator = ({ title, icon: Icon }) => {
   )
 }
 
-export default TaskSeparator
+export default TasksSeparator
