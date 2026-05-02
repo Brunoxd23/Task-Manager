@@ -26,13 +26,13 @@ function Task() {
         </div>
         <div className="flex items-center gap-2">
           <Button variant="secondary">
-            <TrashIcon className="h-4 w-4" />
             Limpar tarefas
+            <TrashIcon className="h-4 w-4" />
           </Button>
           <Button variant="primary">
             <span className="flex items-center gap-1">
-              <AddIcon className="h-4 w-4" />
               Nova tarefa
+              <AddIcon className="h-4 w-4" />
             </span>
           </Button>
         </div>
