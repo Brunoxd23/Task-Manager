@@ -1,9 +1,13 @@
 import Sidebar from "./components/sidebar"
+import Task from "./components/Task"
 
 function App() {
   return (
-    <div>
+    <div className="flex h-screen">
       <Sidebar />
+      <div className="flex flex-1 flex-col">
+        <Task />
+      </div>
     </div>
   )
 }

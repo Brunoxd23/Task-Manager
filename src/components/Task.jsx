@@ -1,33 +1,26 @@
-/* eslint-disable react/jsx-key */
-import { useState } from "react"
-import Header from "./Header"
+import Button from "./Button"
+import TrashIcon from "../assets/icons/trash.svg?react"
+import AddIconn from "../assets/icons/add.svg?react"
 
 function Task() {
-  const [inputValue, setInputValue] = useState("Teste")
-  const [messages, setMessages] = useState([
-    "Hello World",
-    "Welcome to the Task Manager",
-  ])
-
-  function handleButtonClick() {
-    setMessages([...messages, inputValue])
-  }
-
   return (
-    <div>
-      <Header></Header>
-      <input
-        type="text"
-        placeholder="Create your task..."
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={handleButtonClick}>Add Message</button>
-      <ul>
-        {messages.map((message) => {
-          return <li>{message}</li>
-        })}
-      </ul>
+    <div className="flex w-full gap-9 px-8 py-16">
+      <div className="flex w-full justify-between">
+        <div>
+          <span className="text-xs font-semibold">Dashboard</span>
+          <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
+        </div>
+      </div>
+      <div className="flex w-full items-center justify-end gap-3">
+        <Button variant="secondary">
+          <TrashIcon className="h-4 w-4" />
+          Limpar Tarefas
+        </Button>
+        <Button variant="primary">
+          <AddIconn className="h-4 w-4" />
+          Adicionar Tarefa
+        </Button>
+      </div>
     </div>
   )
 }
