@@ -4,14 +4,14 @@ const TASKS = [
     title: "Comprar pão",
     description: "Comprar pão na padaria",
     time: "morning",
-    status: "done",
+    status: "not_started",
   },
   {
     id: 2,
     title: "Estudar React",
     description: "Estudar React para o projeto",
     time: "afternoon",
-    status: "in_progress",
+    status: "not_started",
   },
   {
     id: 3,
