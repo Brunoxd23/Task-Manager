@@ -3,7 +3,7 @@ import Task from "./components/Task"
 
 function App() {
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <Task />
