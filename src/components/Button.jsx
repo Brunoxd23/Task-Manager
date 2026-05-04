@@ -1,4 +1,4 @@
-const Button = ({ children, variant = "primary" }) => {
+const Button = ({ children, variant = "primary", ...rest }) => {
   const getVariantClass = () => {
     if (variant === "primary") {
       return "bg-[#00ADB5] hover:bg-[#0097A7] text-white"
@@ -10,6 +10,7 @@ const Button = ({ children, variant = "primary" }) => {
   return (
     <button
       className={`flex items-center gap-3 rounded-md border border-black px-3 py-1 text-xs font-semibold ${getVariantClass()}`}
+      {...rest}
     >
       {children}
     </button>

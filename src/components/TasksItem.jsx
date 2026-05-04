@@ -2,7 +2,7 @@ import CheckIcon from "../assets/icons/check.svg?react"
 import LoaderIcon from "../assets/icons/loader.svg?react"
 import DetailsIcon from "../assets/icons/details.svg?react"
 import TrashIcon from "../assets/icons/trash.svg?react"
-const TasksItem = ({ task, handleCheckboxClick }) => {
+const TasksItem = ({ task, handleCheckboxClick, handleCheckboxDelete }) => {
   // Cores e estilos inspirados no print
   const getStatusClass = () => {
     if (task.status === "done") {
@@ -51,6 +51,7 @@ const TasksItem = ({ task, handleCheckboxClick }) => {
         <button
           className="flex items-center justify-center rounded-md p-2 transition-colors hover:bg-red-100"
           title="Excluir"
+          onClick={() => handleCheckboxDelete(task.id)}
         >
           <TrashIcon className="h-5 w-5 text-red-500" />
         </button>

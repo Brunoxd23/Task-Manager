@@ -12,6 +12,11 @@ import { useState } from "react"
 function Task() {
   const [tasks, setTasks] = useState(TASKS)
 
+  const handleCheckboxDelete = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id !== taskId)
+    setTasks(newTasks)
+  }
+
   const handleCheckboxClick = (taskId) => {
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
@@ -68,6 +73,7 @@ function Task() {
                 key={task.id}
                 task={task}
                 handleCheckboxClick={handleCheckboxClick}
+                handleCheckboxDelete={handleCheckboxDelete}
               />
             ))}
           </div>
@@ -79,6 +85,7 @@ function Task() {
                 key={task.id}
                 task={task}
                 handleCheckboxClick={handleCheckboxClick}
+                handleCheckboxDelete={handleCheckboxDelete}
               />
             ))}
           </div>
@@ -91,6 +98,7 @@ function Task() {
               key={task.id}
               task={task}
               handleCheckboxClick={handleCheckboxClick}
+              handleCheckboxDelete={handleCheckboxDelete}
             />
           ))}
         </div>
