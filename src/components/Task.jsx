@@ -8,6 +8,7 @@ import TasksSeparator from "./TasksSeparator"
 import TASKS from "../constants/tasks"
 import TasksItem from "./TasksItem"
 import { useState } from "react"
+import { toast, Toaster } from "sonner"
 
 function Task() {
   const [tasks, setTasks] = useState(TASKS)
@@ -15,18 +16,22 @@ function Task() {
   const handleCheckboxDelete = (taskId) => {
     const newTasks = tasks.filter((task) => task.id !== taskId)
     setTasks(newTasks)
+    toast.success("Tarefa excluída com sucesso!")
   }
 
   const handleCheckboxClick = (taskId) => {
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
         if (task.status === "not_started") {
+          toast.info("Tarefa em andamento!")
           return { ...task, status: "in_progress" }
         }
         if (task.status === "in_progress") {
+          toast.success("Tarefa concluída!")
           return { ...task, status: "done" }
         }
         if (task.status === "done") {
+          toast.warning("Tarefa reiniciada!")
           return { ...task, status: "not_started" }
         }
         return task
@@ -50,7 +55,7 @@ function Task() {
           <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="secondary">
+          <Button variant="secondary" onClick={() => setTasks([])}>
             Limpar tarefas
             <TrashIcon className="h-4 w-4" />
           </Button>
