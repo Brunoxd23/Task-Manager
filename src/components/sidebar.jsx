@@ -8,7 +8,7 @@ const NAV = [
 
 const Sidebar = ({ page, setPage }) => {
   return (
-    <div className="flex h-screen w-52 flex-col bg-white shadow-sm dark:bg-gray-800">
+    <div className="sticky top-0 flex h-screen w-52 flex-col bg-white shadow-sm dark:bg-gray-800">
       {/* Logo */}
       <div className="flex h-[68px] flex-col justify-center border-b border-gray-100 px-4 dark:border-gray-700">
         <div className="flex items-center gap-2">
@@ -25,7 +25,7 @@ const Sidebar = ({ page, setPage }) => {
       </div>
 
       {/* Nav */}
-      <nav className="flex flex-col gap-1 p-3">
+      <nav className="flex flex-1 flex-col gap-1 p-3">
         <p className="mb-1 px-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
           Menu
         </p>
@@ -54,6 +54,15 @@ const Sidebar = ({ page, setPage }) => {
           )
         })}
       </nav>
+
+      {/* Footer */}
+      <div className="border-t border-gray-100 px-4 py-4 dark:border-gray-700">
+        <p className="text-[10px] leading-relaxed text-gray-400 dark:text-gray-500">
+          Task Manager
+          <br />
+          <span className="text-[9px]">v1.0.0 · Feito com foco 🎯</span>
+        </p>
+      </div>
     </div>
   )
 }
