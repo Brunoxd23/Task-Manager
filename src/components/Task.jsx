@@ -9,29 +9,32 @@ import TASKS from "../constants/tasks"
 import TasksItem from "./TasksItem"
 import { useState } from "react"
 import { toast, Toaster } from "sonner"
+import AddTaskModal from "./AddTaskModal"
+import * as customToast from "./CustomToast"
 
 function Task() {
   const [tasks, setTasks] = useState(TASKS)
+  const [showAddModal, setShowAddModal] = useState(false)
 
   const handleCheckboxDelete = (taskId) => {
     const newTasks = tasks.filter((task) => task.id !== taskId)
     setTasks(newTasks)
-    toast.success("Tarefa excluída com sucesso!")
+    customToast.toast.success("Tarefa excluída com sucesso!")
   }
 
   const handleCheckboxClick = (taskId) => {
     const newTasks = tasks.map((task) => {
       if (task.id === taskId) {
         if (task.status === "not_started") {
-          toast.info("Tarefa em andamento!")
+          customToast.toast.info("Tarefa em andamento!")
           return { ...task, status: "in_progress" }
         }
         if (task.status === "in_progress") {
-          toast.success("Tarefa concluída!")
+          customToast.toast.success("Tarefa concluída!")
           return { ...task, status: "done" }
         }
         if (task.status === "done") {
-          toast.warning("Tarefa reiniciada!")
+          customToast.toast.warning("Tarefa reiniciada!")
           return { ...task, status: "not_started" }
         }
         return task
@@ -45,6 +48,25 @@ function Task() {
   const afternoonTasks = tasks.filter((task) => task.time === "afternoon")
   const eveningTasks = tasks.filter((task) => task.time === "evening")
 
+  const handleClearTasks = () => {
+    setTasks([])
+    customToast.toast.success("Todas as tarefas foram limpas!")
+  }
+
+  const handleAddTask = () => {
+    setShowAddModal(true)
+  }
+
+  const handleSaveTask = (newTask) => {
+    setTasks([...tasks, newTask])
+    setShowAddModal(false)
+    customToast.toast.success("Tarefa adicionada com sucesso!")
+  }
+
+  const handleCloseModal = () => {
+    setShowAddModal(false)
+  }
+
   return (
     <div className="w-full space-y-6 px-8 py-16">
       <div className="flex w-full items-center justify-between">
@@ -55,11 +77,11 @@ function Task() {
           <h2 className="text-xl font-semibold">Minhas Tarefas</h2>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="secondary" onClick={() => setTasks([])}>
+          <Button variant="secondary" onClick={handleClearTasks}>
             Limpar tarefas
             <TrashIcon className="h-4 w-4" />
           </Button>
-          <Button variant="primary">
+          <Button variant="primary" onClick={handleAddTask}>
             <span className="flex items-center gap-1">
               Nova tarefa
               <AddIcon className="h-4 w-4" />
@@ -108,6 +130,10 @@ function Task() {
           ))}
         </div>
       </div>
+      {showAddModal && (
+        <AddTaskModal onSave={handleSaveTask} onClose={handleCloseModal} />
+      )}
+      <Toaster position="bottom-center" richColors closeButton />
     </div>
   )
 }

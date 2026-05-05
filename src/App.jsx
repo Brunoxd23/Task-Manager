@@ -5,14 +5,7 @@ import { Toaster } from "sonner"
 function App() {
   return (
     <div className="flex">
-      <Toaster
-        toastOptions={{
-          style: {
-            background: "#00bfae",
-            color: "#fff",
-          },
-        }}
-      />
+      <Toaster />
       <Sidebar />
       <div className="flex flex-1 flex-col">
         <Task />
