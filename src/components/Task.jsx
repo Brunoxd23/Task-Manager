@@ -99,9 +99,11 @@ function Task() {
     <div className="min-h-screen w-full space-y-6 px-8 py-8 dark:bg-gray-900">
       <div className="flex w-full items-center justify-between">
         <div>
-          <span className="mb-1 block text-xs font-semibold text-[#00ADB5]">
-            Minhas Tarefas
+          <span className="mb-1 block text-xs font-semibold text-[#00ADB5]"></span>
+          <span className="mb-1 block text-xs font-medium text-[#00ADB5] dark:text-[#00bfae]">
+            Organize seu dia e alcance seus objetivos!
           </span>
+          <span className="mb-1 block text-xs font-medium italic text-gray-400 dark:text-gray-500"></span>
           <h2 className="text-xl font-semibold dark:text-white">
             Minhas Tarefas
           </h2>
