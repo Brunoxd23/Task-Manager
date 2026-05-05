@@ -1,20 +1,15 @@
-const SidebarButton = ({ children, variant }) => {
-  const getVariantClasses = () => {
-    if (variant === "unselect") {
-      return "sidebar-button bg-[#E6F7F8] text-[black] hover:bg-[#00ADB5] hover:text-white transition-colors duration-300 "
-    }
-    if (variant === "select") {
-      return "sidebar-button bg-[#E6F7F8] text-[black] hover:bg-[#00ADB5] hover:text-white transition-colors duration-300 "
-    }
-  }
-  return (
-    <a
-      href="#"
-      className={`flex items-center gap-3 rounded-lg px-6 py-3 ${getVariantClasses()}`}
-    >
-      {children}
-    </a>
-  )
-}
+// SidebarButton mantido para compatibilidade, mas Sidebar agora usa botões inline
+const SidebarButton = ({ children, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+      active
+        ? "bg-[#00ADB5] text-white shadow-sm"
+        : "text-gray-500 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+    }`}
+  >
+    {children}
+  </button>
+)
 
 export default SidebarButton
