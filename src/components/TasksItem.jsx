@@ -2,19 +2,27 @@ import CheckIcon from "../assets/icons/check.svg?react"
 import LoaderIcon from "../assets/icons/loader.svg?react"
 import DetailsIcon from "../assets/icons/details.svg?react"
 import TrashIcon from "../assets/icons/trash.svg?react"
-const TasksItem = ({ task, handleCheckboxClick, handleCheckboxDelete }) => {
-  // Cores e estilos inspirados no print
+
+const priorityDot = {
+  high: "bg-red-500",
+  medium: "bg-yellow-400",
+  low: "bg-green-400",
+}
+
+const TasksItem = ({
+  task,
+  handleCheckboxClick,
+  handleCheckboxDelete,
+  onEdit,
+}) => {
   const getStatusClass = () => {
     if (task.status === "done") {
-      return "bg-[#e6f7f8] text-[#2d3a3a]"
+      return "bg-[#e6f7f8] text-[#2d3a3a] dark:bg-teal-900 dark:text-teal-100"
     }
     if (task.status === "in_progress") {
-      return "bg-[#fff7e6] text-[#a67c00]"
+      return "bg-[#fff7e6] text-[#a67c00] dark:bg-yellow-900 dark:text-yellow-200"
     }
-    if (task.status === "not_started") {
-      return "bg-[#f5f5f5] text-[#888]"
-    }
-    return ""
+    return "bg-[#f5f5f5] text-[#888] dark:bg-gray-700 dark:text-gray-300"
   }
 
   const getCheckStyle = () => {
@@ -27,13 +35,18 @@ const TasksItem = ({ task, handleCheckboxClick, handleCheckboxDelete }) => {
     return "border-2 border-[#d1d5db] bg-[#f5f5f5] text-[#d1d5db]"
   }
 
+  const isOverdue =
+    task.dueDate &&
+    task.status !== "done" &&
+    new Date(task.dueDate + "T00:00:00") < new Date(new Date().toDateString())
+
   return (
     <div
       className={`mb-2 flex items-center justify-between gap-3 rounded-xl px-5 py-4 text-base font-medium transition-all duration-300 ${getStatusClass()}`}
     >
       <div className="flex items-center gap-3">
         <label
-          className={`flex h-7 w-7 items-center justify-center rounded-md transition-all duration-200 ${getCheckStyle()} relative cursor-pointer`}
+          className={`relative flex h-7 w-7 cursor-pointer items-center justify-center rounded-md transition-all duration-200 ${getCheckStyle()}`}
         >
           <input
             type="checkbox"
@@ -45,7 +58,43 @@ const TasksItem = ({ task, handleCheckboxClick, handleCheckboxDelete }) => {
             <LoaderIcon className="h-5 w-5 animate-spin" />
           )}
         </label>
-        {task.title}
+        <div className="flex flex-col gap-0.5">
+          <div className="flex items-center gap-2">
+            {task.priority && (
+              <span
+                className={`h-2 w-2 rounded-full ${priorityDot[task.priority] || "bg-gray-400"}`}
+                title={
+                  task.priority === "high"
+                    ? "Alta"
+                    : task.priority === "medium"
+                      ? "Média"
+                      : "Baixa"
+                }
+              />
+            )}
+            <span
+              className={
+                task.status === "done" ? "line-through opacity-60" : ""
+              }
+            >
+              {task.title}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            {isOverdue && (
+              <span className="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-600">
+                Atrasada
+              </span>
+            )}
+            {task.dueDate && (
+              <span className="text-xs text-gray-400 dark:text-gray-500">
+                {new Date(task.dueDate + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                )}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
       <div className="flex items-center gap-2">
         <button
@@ -55,13 +104,13 @@ const TasksItem = ({ task, handleCheckboxClick, handleCheckboxDelete }) => {
         >
           <TrashIcon className="h-5 w-5 text-red-500" />
         </button>
-        <a
-          href="#"
+        <button
           className="flex items-center justify-center rounded-md p-2 transition-colors hover:bg-blue-100"
-          title="Detalhes"
+          title="Editar"
+          onClick={() => onEdit(task)}
         >
           <DetailsIcon className="h-5 w-5 text-blue-500" />
-        </a>
+        </button>
       </div>
     </div>
   )

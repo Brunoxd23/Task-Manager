@@ -5,6 +5,8 @@ const TASKS = [
     description: "Comprar pão na padaria",
     time: "morning",
     status: "not_started",
+    priority: "medium",
+    dueDate: "",
   },
   {
     id: 2,
@@ -12,6 +14,8 @@ const TASKS = [
     description: "Estudar React para o projeto",
     time: "afternoon",
     status: "not_started",
+    priority: "high",
+    dueDate: "",
   },
   {
     id: 3,
@@ -19,6 +23,8 @@ const TASKS = [
     description: "Fazer exercícios para manter a saúde",
     time: "evening",
     status: "not_started",
+    priority: "low",
+    dueDate: "",
   },
 ]
 
