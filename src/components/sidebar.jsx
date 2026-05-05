@@ -10,16 +10,16 @@ const Sidebar = ({ page, setPage }) => {
   return (
     <div className="flex h-screen w-52 flex-col bg-white shadow-sm dark:bg-gray-800">
       {/* Logo */}
-      <div className="border-b border-gray-100 px-6 py-5 dark:border-gray-700">
+      <div className="flex h-[68px] flex-col justify-center border-b border-gray-100 px-4 dark:border-gray-700">
         <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#00ADB5]">
+          <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-[#00ADB5]">
             <TaskIcon className="h-4 w-4 text-white" />
           </div>
-          <span className="text-base font-bold text-gray-800 dark:text-white">
+          <span className="truncate text-base font-bold text-gray-800 dark:text-white">
             Task Manager
           </span>
         </div>
-        <p className="mt-1.5 text-xs text-gray-400 dark:text-gray-500">
+        <p className="mt-1 truncate text-xs text-gray-400 dark:text-gray-500">
           Organize seu dia com foco
         </p>
       </div>

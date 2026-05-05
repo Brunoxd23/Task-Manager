@@ -24,7 +24,7 @@ const TopBar = ({ isDark, toggleDark }) => {
   })
 
   return (
-    <div className="sticky top-0 z-40 flex items-center justify-between border-b border-gray-200 bg-white px-8 py-3 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+    <div className="sticky top-0 z-40 flex h-[68px] items-center justify-between border-b border-gray-200 bg-white px-8 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <div className="flex flex-col">
         <span className="text-xs capitalize text-gray-400 dark:text-gray-500">
           {dateFmt}
