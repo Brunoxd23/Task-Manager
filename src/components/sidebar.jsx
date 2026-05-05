@@ -6,9 +6,11 @@ const NAV = [
   { id: "tasks", label: "Minhas tarefas", Icon: TaskIcon },
 ]
 
-const Sidebar = ({ page, setPage }) => {
+const Sidebar = ({ page, setPage, isOpen, onClose }) => {
   return (
-    <div className="sticky top-0 flex h-screen w-52 flex-col bg-white shadow-sm dark:bg-gray-800">
+    <aside
+      className={`fixed inset-y-0 left-0 z-50 flex h-full w-64 flex-col bg-white shadow-lg transition-transform duration-300 dark:bg-gray-800 md:sticky md:top-0 md:h-screen md:w-52 md:translate-x-0 md:shadow-sm ${isOpen ? "translate-x-0" : "-translate-x-full"}`}
+    >
       {/* Logo */}
       <div className="flex h-[68px] flex-col justify-center border-b border-gray-100 px-4 dark:border-gray-700">
         <div className="flex items-center gap-2">
@@ -35,14 +37,14 @@ const Sidebar = ({ page, setPage }) => {
             <button
               key={id}
               onClick={() => setPage(id)}
-              className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+              className={`flex min-h-[44px] w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
                 active
                   ? "bg-[#00ADB5] text-white shadow-sm"
-                  : "text-gray-500 hover:bg-gray-100 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                  : "text-gray-500 hover:bg-gray-100 hover:text-gray-800 focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200 dark:focus:bg-gray-700"
               }`}
             >
               <Icon
-                className={`h-4 w-4 flex-shrink-0 ${
+                className={`h-5 w-5 flex-shrink-0 ${
                   active ? "text-white" : "text-gray-400"
                 }`}
               />
@@ -57,13 +59,13 @@ const Sidebar = ({ page, setPage }) => {
 
       {/* Footer */}
       <div className="border-t border-gray-100 px-4 py-4 dark:border-gray-700">
-        <p className="text-[10px] leading-relaxed text-gray-400 dark:text-gray-500">
+        <p className="text-xs leading-relaxed text-gray-400 dark:text-gray-500">
           Task Manager
           <br />
-          <span className="text-[9px]">v1.0.0 · Feito com foco 🎯</span>
+          <span className="text-[10px]">v1.0.0 · Feito com foco 🎯</span>
         </p>
       </div>
-    </div>
+    </aside>
   )
 }
 

@@ -42,11 +42,11 @@ const TasksItem = ({
 
   return (
     <div
-      className={`mb-2 flex items-center justify-between gap-3 rounded-xl px-5 py-4 text-base font-medium transition-all duration-300 ${getStatusClass()}`}
+      className={`mb-2 flex items-center justify-between gap-2 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-300 md:px-5 md:py-4 md:text-base ${getStatusClass()}`}
     >
       <div className="flex items-center gap-3">
         <label
-          className={`relative flex h-7 w-7 cursor-pointer items-center justify-center rounded-md transition-all duration-200 ${getCheckStyle()}`}
+          className={`relative flex h-8 w-8 flex-shrink-0 cursor-pointer items-center justify-center rounded-md transition-all duration-200 md:h-7 md:w-7 ${getCheckStyle()}`}
         >
           <input
             type="checkbox"
@@ -98,14 +98,14 @@ const TasksItem = ({
       </div>
       <div className="flex items-center gap-2">
         <button
-          className="flex items-center justify-center rounded-md p-2 transition-colors hover:bg-red-100"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl transition-colors hover:bg-red-100 focus:bg-red-100 dark:hover:bg-red-900/30"
           title="Excluir"
           onClick={() => handleCheckboxDelete(task.id)}
         >
           <TrashIcon className="h-5 w-5 text-red-500" />
         </button>
         <button
-          className="flex items-center justify-center rounded-md p-2 transition-colors hover:bg-blue-100"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-xl transition-colors hover:bg-blue-100 focus:bg-blue-100 dark:hover:bg-blue-900/30"
           title="Editar"
           onClick={() => onEdit(task)}
         >

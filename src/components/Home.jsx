@@ -13,9 +13,9 @@ const QUOTES = [
 const todayQuote = QUOTES[new Date().getDay() % QUOTES.length]
 
 const StatCard = ({ label, value, color }) => (
-  <div className="flex flex-col items-center rounded-2xl bg-gray-50 px-6 py-5 dark:bg-gray-700">
-    <span className={`text-3xl font-bold ${color}`}>{value}</span>
-    <span className="mt-1 text-xs text-gray-400">{label}</span>
+  <div className="flex flex-col items-center rounded-2xl bg-gray-50 px-4 py-4 dark:bg-gray-700 md:px-6 md:py-5">
+    <span className={`text-2xl font-bold md:text-3xl ${color}`}>{value}</span>
+    <span className="mt-1 text-center text-xs text-gray-400">{label}</span>
   </div>
 )
 
@@ -37,12 +37,12 @@ const Home = ({ setPage }) => {
   const greeting = hour < 12 ? "Bom dia" : hour < 18 ? "Boa tarde" : "Boa noite"
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center p-10">
+    <div className="flex flex-1 flex-col items-center justify-center p-4 md:p-10">
       <div className="w-full max-w-lg">
         {/* Saudação */}
-        <div className="mb-8 text-center">
+        <div className="mb-6 text-center md:mb-8">
           <p className="text-sm font-medium text-[#00ADB5]">{greeting} 👋</p>
-          <h1 className="mt-1 text-3xl font-bold text-gray-800 dark:text-white">
+          <h1 className="mt-1 text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">
             Bem-vindo ao Task Manager
           </h1>
           <p className="mt-3 text-sm italic text-gray-400">
@@ -52,7 +52,7 @@ const Home = ({ setPage }) => {
 
         {/* Stats */}
         {stats.total > 0 ? (
-          <div className="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4 md:mb-8">
             <StatCard
               label="Total"
               value={stats.total}
@@ -79,7 +79,7 @@ const Home = ({ setPage }) => {
             />
           </div>
         ) : (
-          <div className="mb-8 rounded-2xl bg-gray-50 py-10 text-center dark:bg-gray-700">
+          <div className="mb-6 rounded-2xl bg-gray-50 py-10 text-center dark:bg-gray-700 md:mb-8">
             <p className="text-sm text-gray-400">
               Nenhuma tarefa cadastrada ainda.
             </p>
@@ -89,7 +89,7 @@ const Home = ({ setPage }) => {
         {/* CTA */}
         <button
           onClick={() => setPage("tasks")}
-          className="w-full rounded-2xl bg-[#00ADB5] py-3.5 text-sm font-semibold text-white shadow transition hover:bg-[#009aa1] active:scale-95"
+          className="w-full rounded-2xl bg-[#00ADB5] py-4 text-sm font-semibold text-white shadow transition hover:bg-[#009aa1] active:scale-95 md:py-3.5"
         >
           {stats.total > 0 ? "Ver minhas tarefas →" : "Criar primeira tarefa →"}
         </button>

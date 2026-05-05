@@ -96,26 +96,24 @@ function Task() {
   const eveningTasks = filtered.filter((t) => t.time === "evening")
 
   return (
-    <div className="min-h-screen w-full space-y-6 px-8 py-8 dark:bg-gray-900">
-      <div className="flex w-full items-center justify-between">
+    <div className="min-h-screen w-full space-y-4 px-4 py-4 dark:bg-gray-900 md:space-y-6 md:px-8 md:py-8">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <span className="mb-1 block text-xs font-semibold text-[#00ADB5]"></span>
           <span className="mb-1 block text-xs font-medium text-[#00ADB5] dark:text-[#00bfae]">
             Organize seu dia e alcance seus objetivos!
           </span>
-          <span className="mb-1 block text-xs font-medium italic text-gray-400 dark:text-gray-500"></span>
-          <h2 className="text-xl font-semibold dark:text-white">
+          <h2 className="text-lg font-semibold dark:text-white md:text-xl">
             Minhas Tarefas
           </h2>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="secondary" onClick={() => setShowClearModal(true)}>
-            Limpar tarefas
+            <span className="hidden sm:inline">Limpar tarefas</span>
             <TrashIcon className="h-4 w-4" />
           </Button>
           <Button variant="primary" onClick={() => setShowAddModal(true)}>
             <span className="flex items-center gap-1">
-              Nova tarefa
+              <span className="hidden sm:inline">Nova tarefa</span>
               <AddIcon className="h-4 w-4" />
             </span>
           </Button>
@@ -133,7 +131,7 @@ function Task() {
         setPriorityFilter={setPriorityFilter}
       />
 
-      <div className="mt-4 w-full rounded-lg bg-white p-6 dark:bg-gray-800">
+      <div className="mt-2 w-full rounded-xl bg-white p-4 dark:bg-gray-800 md:mt-4 md:p-6">
         <div className="flex flex-col gap-2">
           <div className="space-y-3">
             <TasksSeparator title="Manhã" Icon={SunIcon} />
