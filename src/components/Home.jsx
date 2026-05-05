@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { useNavigate } from "react-router-dom"
 import { usePersistedTasks } from "../hooks/usePersistedTasks"
 import TASKS from "../constants/tasks"
 
@@ -19,7 +20,8 @@ const StatCard = ({ label, value, color }) => (
   </div>
 )
 
-const Home = ({ setPage }) => {
+const Home = () => {
+  const navigate = useNavigate()
   const [tasks] = usePersistedTasks(TASKS)
 
   const stats = useMemo(() => {
@@ -88,7 +90,7 @@ const Home = ({ setPage }) => {
 
         {/* CTA */}
         <button
-          onClick={() => setPage("tasks")}
+          onClick={() => navigate("/minhas-tarefas")}
           className="w-full rounded-2xl bg-[#00ADB5] py-4 text-sm font-semibold text-white shadow transition hover:bg-[#009aa1] active:scale-95 md:py-3.5"
         >
           {stats.total > 0 ? "Ver minhas tarefas →" : "Criar primeira tarefa →"}
