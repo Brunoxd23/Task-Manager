@@ -12,10 +12,12 @@ import ClearTasksModal from "./ClearTasksModal"
 import * as customToast from "./CustomToast"
 import { usePersistedTasks } from "../hooks/usePersistedTasks"
 import { useGoogleCalendar } from "../hooks/useGoogleCalendar"
+import { usePushNotifications } from "../hooks/usePushNotifications"
 
 function Task() {
   const [tasks, setTasks] = usePersistedTasks(TASKS)
   const { createEvent } = useGoogleCalendar()
+  const { notifyTask } = usePushNotifications()
   const [showAddModal, setShowAddModal] = useState(false)
   const [editTask, setEditTask] = useState(null)
   const [search, setSearch] = useState("")
@@ -75,6 +77,7 @@ function Task() {
     setShowAddModal(false)
     customToast.toast.success("Tarefa adicionada com sucesso!")
     if (newTask.dueDate) createEvent(newTask)
+    notifyTask(newTask)
   }
 
   const handleUpdateTask = (updatedTask) => {
