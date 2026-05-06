@@ -20,4 +20,15 @@ module.exports = {
     "react/prop-types": "off",
     "no-unused-vars": "off",
   },
+  overrides: [
+    {
+      files: ["public/firebase-messaging-sw.js"],
+      env: { serviceworker: true },
+      globals: { firebase: "readonly" },
+    },
+    {
+      files: ["src/contexts/*.jsx", "src/contexts/*.js"],
+      rules: { "react-refresh/only-export-components": "off" },
+    },
+  ],
 }

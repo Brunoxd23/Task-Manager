@@ -11,9 +11,11 @@ import DaySummary from "./DaySummary"
 import ClearTasksModal from "./ClearTasksModal"
 import * as customToast from "./CustomToast"
 import { usePersistedTasks } from "../hooks/usePersistedTasks"
+import { useGoogleCalendar } from "../hooks/useGoogleCalendar"
 
 function Task() {
   const [tasks, setTasks] = usePersistedTasks(TASKS)
+  const { createEvent } = useGoogleCalendar()
   const [showAddModal, setShowAddModal] = useState(false)
   const [editTask, setEditTask] = useState(null)
   const [search, setSearch] = useState("")
@@ -72,6 +74,7 @@ function Task() {
     setTasks([...tasks, newTask])
     setShowAddModal(false)
     customToast.toast.success("Tarefa adicionada com sucesso!")
+    if (newTask.dueDate) createEvent(newTask)
   }
 
   const handleUpdateTask = (updatedTask) => {
@@ -104,7 +107,8 @@ function Task() {
             Organize seu dia e alcance seus objetivos!
           </span>
           <h2 className="text-lg font-semibold dark:text-white md:text-xl">
-            Minhas Tarefas
+            Inicio do dia,{" "}
+            {new Date().toLocaleDateString("pt-BR", { weekday: "long" })}!
           </h2>
         </div>
         <div className="flex items-center gap-2">
@@ -134,6 +138,9 @@ function Task() {
         setPeriodFilter={setPeriodFilter}
       />
 
+      <h2 className="text-lg font-semibold dark:text-white md:text-xl">
+        Minhas Tarefas
+      </h2>
       <div className="mt-2 w-full rounded-xl bg-white p-4 dark:bg-gray-800 md:mt-4 md:p-6">
         <div className="flex flex-col gap-2">
           <div className="space-y-3">
