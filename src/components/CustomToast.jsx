@@ -31,6 +31,7 @@ export const toast = {
           message={message}
           type="error"
           duration={duration}
+          action={options.action}
           onClose={() => sonnerToast.dismiss(t)}
         />
       ),

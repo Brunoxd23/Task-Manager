@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react"
-import { toast as sonnerToast } from "sonner"
 import Button from "./Button"
 import { TrashIcon, AddIcon, SunIcon, MoonIcon, CloudIcon } from "../assets"
 import TasksSeparator from "./TasksSeparator"
@@ -35,9 +34,8 @@ function Task() {
   const handleCheckboxDelete = (taskId) => {
     const taskToDelete = tasks.find((task) => task.id === taskId)
     setTasks((prev) => prev.filter((task) => task.id !== taskId))
-    sonnerToast(`"${taskToDelete.title}" excluída`, {
+    customToast.toast.error(`"${taskToDelete.title}" excluída`, {
       duration: 5000,
-      position: "bottom-right",
       action: {
         label: "Desfazer",
         onClick: () => {
