@@ -149,12 +149,23 @@
 
 @keyframes slideIn {
   from {
-    transform: translateX(100%);
+    transform: translateX(calc(100% + 24px));
     opacity: 0;
   }
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(calc(100% + 24px));
+    opacity: 0;
   }
 }
 
@@ -205,7 +216,11 @@
 }
 
 .animate-slide-in {
-  animation: slideIn 0.3s ease-out;
+  animation: slideIn 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) forwards;
+}
+
+.animate-slide-out {
+  animation: slideOut 0.35s cubic-bezier(0.06, 0.71, 0.55, 1) forwards;
 }
 
 .animate-bounce-in {
@@ -224,27 +239,17 @@
   animation: pulseSlow 2s ease-in-out infinite;
 }
 
-/* Efeito de hover suave nos toasts */
+/* Sonner wrapper: sem transformações que atrapalhem */
+[data-sonner-toaster] {
+  right: 16px !important;
+  bottom: 16px !important;
+  left: auto !important;
+}
+
 [data-sonner-toast] {
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-[data-sonner-toast]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo do botão de fechar */
-[data-sonner-toast] button {
-  opacity: 0.7;
-  transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
-}
-
-[data-sonner-toast]:hover button {
-  opacity: 1;
-  transform: scale(1.1);
+  width: 360px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
 }

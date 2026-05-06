@@ -20,6 +20,7 @@ function Task() {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
   const [priorityFilter, setPriorityFilter] = useState("all")
+  const [periodFilter, setPeriodFilter] = useState("all")
   const [showClearModal, setShowClearModal] = useState(false)
 
   const handleConfirmClear = (selectedIds) => {
@@ -36,6 +37,7 @@ function Task() {
     setTasks((prev) => prev.filter((task) => task.id !== taskId))
     sonnerToast(`"${taskToDelete.title}" excluída`, {
       duration: 5000,
+      position: "bottom-right",
       action: {
         label: "Desfazer",
         onClick: () => {
@@ -86,9 +88,10 @@ function Task() {
         (t) =>
           t.title.toLowerCase().includes(search.toLowerCase()) &&
           (statusFilter === "all" || t.status === statusFilter) &&
-          (priorityFilter === "all" || t.priority === priorityFilter)
+          (priorityFilter === "all" || t.priority === priorityFilter) &&
+          (periodFilter === "all" || t.time === periodFilter)
       ),
-    [tasks, search, statusFilter, priorityFilter]
+    [tasks, search, statusFilter, priorityFilter, periodFilter]
   )
 
   const morningTasks = filtered.filter((t) => t.time === "morning")
@@ -107,7 +110,7 @@ function Task() {
           </h2>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="secondary" onClick={() => setShowClearModal(true)}>
+          <Button variant="tertiary" onClick={() => setShowClearModal(true)}>
             <span className="hidden sm:inline">Limpar tarefas</span>
             <TrashIcon className="h-4 w-4" />
           </Button>
@@ -129,6 +132,8 @@ function Task() {
         setStatusFilter={setStatusFilter}
         priorityFilter={priorityFilter}
         setPriorityFilter={setPriorityFilter}
+        periodFilter={periodFilter}
+        setPeriodFilter={setPeriodFilter}
       />
 
       <div className="mt-2 w-full rounded-xl bg-white p-4 dark:bg-gray-800 md:mt-4 md:p-6">

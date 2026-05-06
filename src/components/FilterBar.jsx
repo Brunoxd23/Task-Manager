@@ -1,3 +1,5 @@
+import { useState, useRef, useEffect } from "react"
+
 const STATUS_OPTIONS = [
   { value: "all", label: "Todas" },
   { value: "not_started", label: "Pendentes" },
@@ -12,6 +14,90 @@ const PRIORITY_OPTIONS = [
   { value: "low", label: "Baixa", dot: "bg-green-400" },
 ]
 
+const PERIOD_OPTIONS = [
+  { value: "all", label: "Todos" },
+  { value: "morning", label: "Manhã" },
+  { value: "afternoon", label: "Tarde" },
+  { value: "evening", label: "Noite" },
+]
+
+const FilterSelect = ({ label, options, value, onChange }) => {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const selected = options.find((o) => o.value === value) ?? options[0]
+  const isActive = value !== "all"
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [])
+
+  return (
+    <div className="relative flex flex-col gap-1" ref={ref}>
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+        {label}
+      </span>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`flex min-w-[130px] items-center justify-between gap-2 rounded-xl border px-3 py-1.5 text-sm font-medium transition-all ${
+          isActive
+            ? "border-[#00ADB5] bg-[#00ADB5]/10 text-[#00ADB5] dark:bg-[#00ADB5]/20 dark:text-[#00d4dc]"
+            : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 dark:hover:border-gray-500"
+        }`}
+      >
+        <span className="flex items-center gap-1.5">
+          {selected.dot && (
+            <span
+              className={`h-2 w-2 flex-shrink-0 rounded-full ${selected.dot}`}
+            />
+          )}
+          {selected.label}
+        </span>
+        <svg
+          className={`h-3.5 w-3.5 flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute left-0 top-full z-50 mt-1 min-w-full overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800">
+          {options.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => {
+                onChange(opt.value)
+                setOpen(false)
+              }}
+              className={`flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors ${
+                opt.value === value
+                  ? "bg-[#00ADB5]/10 font-medium text-[#00ADB5] dark:bg-[#00ADB5]/20 dark:text-[#00d4dc]"
+                  : "text-gray-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700"
+              }`}
+            >
+              {opt.dot && (
+                <span
+                  className={`h-2 w-2 flex-shrink-0 rounded-full ${opt.dot}`}
+                />
+              )}
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 const FilterBar = ({
   search,
   setSearch,
@@ -19,19 +105,25 @@ const FilterBar = ({
   setStatusFilter,
   priorityFilter,
   setPriorityFilter,
+  periodFilter,
+  setPeriodFilter,
 }) => {
   const hasActiveFilters =
-    search !== "" || statusFilter !== "all" || priorityFilter !== "all"
+    search !== "" ||
+    statusFilter !== "all" ||
+    priorityFilter !== "all" ||
+    periodFilter !== "all"
 
   const clearAll = () => {
     setSearch("")
     setStatusFilter("all")
     setPriorityFilter("all")
+    setPeriodFilter("all")
   }
 
   return (
     <div className="flex flex-col gap-3 rounded-2xl bg-white px-5 py-4 shadow-sm dark:bg-gray-800">
-      {/* Linha 1: busca + limpar */}
+      {/* Busca */}
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
           <svg
@@ -92,61 +184,26 @@ const FilterBar = ({
         )}
       </div>
 
-      {/* Linha 2: Status + Prioridade */}
-      <div className="flex flex-wrap items-start gap-4">
-        {/* Status */}
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-            Status
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {STATUS_OPTIONS.map(({ value, label }) => (
-              <button
-                key={value}
-                onClick={() => setStatusFilter(value)}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-all ${
-                  statusFilter === value
-                    ? "bg-[#00ADB5] text-white shadow-sm"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Divisor */}
-        <div className="hidden self-stretch border-l border-gray-100 dark:border-gray-700 sm:block" />
-
-        {/* Prioridade */}
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-            Prioridade
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {PRIORITY_OPTIONS.map(({ value, label, dot }) => (
-              <button
-                key={value}
-                onClick={() => setPriorityFilter(value)}
-                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all ${
-                  priorityFilter === value
-                    ? "bg-[#00ADB5] text-white shadow-sm"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
-                }`}
-              >
-                {dot && (
-                  <span
-                    className={`h-2 w-2 rounded-full ${
-                      priorityFilter === value ? "bg-white/80" : dot
-                    }`}
-                  />
-                )}
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* Filtros lado a lado */}
+      <div className="flex flex-wrap items-end gap-3">
+        <FilterSelect
+          label="Status"
+          options={STATUS_OPTIONS}
+          value={statusFilter}
+          onChange={setStatusFilter}
+        />
+        <FilterSelect
+          label="Prioridade"
+          options={PRIORITY_OPTIONS}
+          value={priorityFilter}
+          onChange={setPriorityFilter}
+        />
+        <FilterSelect
+          label="Período"
+          options={PERIOD_OPTIONS}
+          value={periodFilter}
+          onChange={setPeriodFilter}
+        />
       </div>
     </div>
   )
