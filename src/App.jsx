@@ -16,12 +16,16 @@ function App() {
       <Toaster
         position="bottom-right"
         richColors
+        theme={isDark ? "dark" : "light"}
         toastOptions={{
           classNames: {
-            toast: "dark:bg-gray-800 dark:text-white dark:border-gray-700",
+            toast:
+              "dark:bg-gray-800 dark:text-white dark:border-gray-700 font-sans",
             title: "dark:text-white",
             description: "dark:text-gray-300",
-            actionButton: "dark:bg-[#00ADB5] dark:text-white",
+            actionButton:
+              "!bg-[#00ADB5] !text-white hover:!bg-[#009aa1] !font-semibold",
+            cancelButton: "dark:bg-gray-700 dark:text-gray-300",
           },
         }}
       />
