@@ -13,7 +13,18 @@ function App() {
 
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-gray-900">
-      <Toaster position="bottom-right" richColors />
+      <Toaster
+        position="bottom-right"
+        richColors
+        toastOptions={{
+          classNames: {
+            toast: "dark:bg-gray-800 dark:text-white dark:border-gray-700",
+            title: "dark:text-white",
+            description: "dark:text-gray-300",
+            actionButton: "dark:bg-[#00ADB5] dark:text-white",
+          },
+        }}
+      />
 
       {/* Overlay mobile */}
       {sidebarOpen && (
